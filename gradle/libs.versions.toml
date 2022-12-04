@@ -1,0 +1,15 @@
+[versions]
+androidDesugarJdkLibs = "1.2.0"
+kotlin = "1.7.21"
+androidGradlePlugin = "7.3.1"
+ktx = "1.9.0"
+composeCompiler = "1.4.0-alpha02"
+compose = "1.4.0-alpha02"
+accompanist = "0.28.0"
+material = "1.8.0-alpha02"
+material3Compose = "1.1.0-alpha02"
+
+[libraries]
+android-desugarJdkLibs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "androidDesugarJdkLibs" }
+android-gradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "androidGradlePlugin" }
+kotlin-gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }

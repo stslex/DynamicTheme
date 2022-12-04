@@ -1,4 +1,4 @@
-package st.slex.dynamictheme
+package com.stslex.dynamictheme
 
 import org.junit.Test
 
