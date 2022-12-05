@@ -1,18 +1,19 @@
 plugins {
     id("dynamictheme.android.application")
     id("dynamictheme.android.application.compose")
+    id("org.jetbrains.kotlin.android")
 }
 
 @Suppress("UnstableApiUsage")
 android {
-    namespace = "st.slex.dynamictheme"
+    namespace = "com.slex.dynamictheme"
 
     defaultConfig {
-        applicationId = "st.slex.dynamictheme"
+        applicationId = "com.stslex.dynamictheme"
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner =  "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -27,11 +28,12 @@ android {
 }
 
 dependencies {
+    implementation(project(":core"))
+    implementation(project(":core-test"))
+    implementation(project(":core-ui"))
+    implementation(project(":core-navigation"))
+    implementation(project(":feature-home"))
 
-    implementation ("androidx.core:core-ktx:1.9.0")
-    implementation ("androidx.appcompat:appcompat:1.5.1")
-    implementation ("com.google.android.material:material:1.7.0")
-    testImplementation ("junit:junit:4.13.2")
-    androidTestImplementation ("androidx.test.ext:junit:1.1.4")
-    androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.0")
+    implementation("androidx.appcompat:appcompat:1.5.1")
+    implementation("com.google.android.material:material:1.7.0")
 }
