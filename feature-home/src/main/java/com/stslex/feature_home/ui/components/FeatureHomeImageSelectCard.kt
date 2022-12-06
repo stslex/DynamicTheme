@@ -7,21 +7,29 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.bumptech.glide.load.resource.bitmap.DownsampleStrategy
+import com.bumptech.glide.request.RequestOptions
+import com.skydoves.landscapist.glide.GlideImage
 import com.stslex.core_ui.AppTheme
+import com.stslex.feature_home.domain.ThemeType
+import com.stslex.feature_home.ui.model.ThemeImageUIModel
 
 @Composable
 fun FeatureHomeImageSelectCard(
-    isDarkTheme: Boolean,
-    onImagePickClick: () -> Unit,
     modifier: Modifier = Modifier,
-    Content: @Composable (Boolean) -> Unit = {}
+    imageUIModel: ThemeImageUIModel,
+    onImagePickClick: () -> Unit,
 ) {
-    AppTheme(isDarkTheme = isDarkTheme) {
+    val configuration = LocalConfiguration.current
+    val width = configuration.screenWidthDp
+    val height = configuration.screenHeightDp
+    AppTheme(isDarkTheme = imageUIModel.type.isDark) {
         ElevatedCard(
             modifier = modifier
                 .padding(16.dp)
@@ -30,16 +38,22 @@ fun FeatureHomeImageSelectCard(
                 defaultElevation = 8.dp
             )
         ) {
-            Surface(
+            GlideImage(
                 modifier = Modifier
                     .fillMaxSize()
-                    .clickable(onClick = onImagePickClick)
-            ) {
-                Content(isDarkTheme)
-            }
+                    .clipToBounds()
+                    .clickable(onClick = onImagePickClick),
+                imageModel = {
+                    imageUIModel.uri
+                },
+                requestOptions = {
+                    RequestOptions()
+                        .override(width, height)
+                        .downsample(DownsampleStrategy.FIT_CENTER)
+                }
+            )
         }
     }
-
 }
 
 @Preview
@@ -49,7 +63,10 @@ fun PreviewSelectablePrimaryRowItem(
 ) {
     AppTheme {
         Row {
-            FeatureHomeImageSelectCard(false, {})
+            FeatureHomeImageSelectCard(
+                imageUIModel = ThemeImageUIModel(ThemeType.DARK, null),
+                onImagePickClick = {}
+            )
         }
     }
 }

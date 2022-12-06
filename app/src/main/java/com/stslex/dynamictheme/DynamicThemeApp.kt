@@ -9,11 +9,11 @@ import org.koin.core.context.startKoin
 class DynamicThemeApp : Application() {
 
     override fun onCreate() {
-        super.onCreate()
         startKoin {
             androidLogger()
             androidContext(this@DynamicThemeApp)
             modules(appModules)
         }
+        super.onCreate()
     }
 }

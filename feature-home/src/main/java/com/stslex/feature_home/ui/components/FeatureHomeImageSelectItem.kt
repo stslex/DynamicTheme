@@ -9,6 +9,8 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -16,19 +18,21 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.stslex.core_ui.AppTheme
 import com.stslex.feature_home.R
+import com.stslex.feature_home.domain.ThemeType
+import com.stslex.feature_home.ui.model.ThemeImageUIModel
 
 @Composable
 fun FeatureHomeImageSelectItem(
     modifier: Modifier = Modifier,
-    isDarkTheme: Boolean,
+    imageUIModel: ThemeImageUIModel,
     isSelected: State<Boolean>,
     onImagePickClick: () -> Unit,
-    onChangeImageClick: (Boolean) -> Unit,
-    Content: @Composable (Boolean) -> Unit = {}
+    onChangeImageClick: () -> Unit,
 ) {
     val animatedPadding = animateDpAsState(
-        targetValue = if (isSelected.value == isDarkTheme) 16.dp else 32.dp
+        targetValue = if (isSelected.value == imageUIModel.type.isDark) 16.dp else 32.dp
     )
+
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -36,34 +40,27 @@ fun FeatureHomeImageSelectItem(
         Icon(
             modifier = Modifier.padding(animatedPadding.value),
             painter = painterResource(
-                id = if (isDarkTheme) {
+                id = if (imageUIModel.type.isDark) {
                     R.drawable.baseline_nightlight_24
                 } else {
                     R.drawable.baseline_light_mode_24
                 }
             ),
-            contentDescription = if (isDarkTheme) {
-                "night theme"
-            } else {
-                "light theme"
-            }
+            contentDescription = null
         )
         FeatureHomeImageSelectCard(
             modifier = Modifier,
-            isDarkTheme = isDarkTheme,
-            Content = Content,
+            imageUIModel = imageUIModel,
             onImagePickClick = onImagePickClick
         )
         AnimatedVisibility(
-            visible = isSelected.value == isDarkTheme
+            visible = isSelected.value == imageUIModel.type.isDark
         ) {
             OutlinedButton(
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
                     .padding(top = 16.dp),
-                onClick = {
-                    onChangeImageClick(isDarkTheme)
-                }
+                onClick = onChangeImageClick
             ) {
                 Text(text = "change")
             }
@@ -75,6 +72,14 @@ fun FeatureHomeImageSelectItem(
 @Composable
 fun FeatureHomeImageSelectItemPreview() {
     AppTheme {
-        FeatureHomeImageSelectCard(false, {})
+        val isSelected = remember {
+            mutableStateOf(false)
+        }
+        FeatureHomeImageSelectItem(
+            imageUIModel = ThemeImageUIModel(ThemeType.DARK, null),
+            isSelected = isSelected,
+            onImagePickClick = {},
+            onChangeImageClick = {}
+        )
     }
 }

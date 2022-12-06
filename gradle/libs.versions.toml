@@ -2,7 +2,7 @@
 androidDesugarJdkLibs = "1.2.0"
 kotlin = "1.7.21"
 androidGradlePlugin = "7.3.1"
-
+ksp = "1.7.21-1.0.8"
 ktx = "1.9.0"
 
 composeCompiler = "1.4.0-alpha02"
@@ -11,13 +11,21 @@ accompanist = "0.28.0"
 
 koin = "3.2.2"
 koinAndroid = "3.3.0"
+coil = "2.2.2"
+
+room = "2.4.3"
 
 [libraries]
 android-desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "androidDesugarJdkLibs" }
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 
+ksp-api = { group = "com.google.devtools.ksp", name = "symbol-processing-api", version.ref = "ksp" }
+
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "ktx" }
+androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version = "1.5.1" }
 
@@ -31,6 +39,7 @@ androidx-navigation-compose = { group = "androidx.navigation", name = "navigatio
 androidx-constraintlayout-compose = { group = "androidx.constraintlayout", name = "constraintlayout-compose", version = "1.0.1" }
 
 accompanist-systemuicontroller = { group = "com.google.accompanist", name = "accompanist-systemuicontroller", version.ref = "accompanist" }
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 
 koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
 koin-ktor = { group = "io.insert-koin", name = "koin-ktor", version.ref = "koin" }
@@ -42,18 +51,23 @@ koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = 
 koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koinAndroid" }
 koin-workmanager = { group = "io.insert-koin", name = "koin-androidx-workmanager", version.ref = "koinAndroid" }
 
+
 androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 junit = { module = "junit:junit", version = "4.13.2" }
 androidx-test-junit = { group = "androidx.test.ext", name = "junit", version = "1.1.4" }
 androidx-test-espresso = { group = "androidx.test.espresso", name = "espresso-core", version = "3.5.0" }
 
+[plugins]
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+
 [bundles]
 compose = [
     "androidx-compose-material3",
     "androidx-compose-ui-tooling-core",
     "androidx-compose-ui-tooling-preview",
-    "androidx-compose-material3-wsc"
+    "androidx-compose-material3-wsc",
+    "coil-compose"
 ]
 accompanist = ["accompanist-systemuicontroller"]
 koin = [

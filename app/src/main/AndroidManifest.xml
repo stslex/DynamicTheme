@@ -2,6 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+<!--    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ" />
+    <uses-permission android:name="android.permission.SET_WALLPAPER" />
+
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />-->
+
     <application
         android:name="com.stslex.dynamictheme.DynamicThemeApp"
         android:allowBackup="true"
@@ -23,5 +31,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>
