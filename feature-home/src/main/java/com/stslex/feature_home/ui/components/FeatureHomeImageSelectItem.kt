@@ -1,5 +1,6 @@
 package com.stslex.feature_home.ui.components
 
+import android.net.Uri
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.layout.Column
@@ -76,7 +77,7 @@ fun FeatureHomeImageSelectItemPreview() {
             mutableStateOf(false)
         }
         FeatureHomeImageSelectItem(
-            imageUIModel = ThemeImageUIModel(ThemeType.DARK, null),
+            imageUIModel = ThemeImageUIModel(ThemeType.DARK, Uri.parse("")),
             isSelected = isSelected,
             onImagePickClick = {},
             onChangeImageClick = {}

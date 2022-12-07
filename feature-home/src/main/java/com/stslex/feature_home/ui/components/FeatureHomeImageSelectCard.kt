@@ -1,5 +1,6 @@
 package com.stslex.feature_home.ui.components
 
+import android.net.Uri
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
@@ -64,7 +65,7 @@ fun PreviewSelectablePrimaryRowItem(
     AppTheme {
         Row {
             FeatureHomeImageSelectCard(
-                imageUIModel = ThemeImageUIModel(ThemeType.DARK, null),
+                imageUIModel = ThemeImageUIModel(ThemeType.DARK, Uri.parse("")),
                 onImagePickClick = {}
             )
         }

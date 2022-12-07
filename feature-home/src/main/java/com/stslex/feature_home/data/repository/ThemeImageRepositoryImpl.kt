@@ -1,6 +1,6 @@
 package com.stslex.feature_home.data.repository
 
-import com.stslex.feature_home.data.data_source.ThemeImageDao
+import com.stslex.core_data_source.dao.ThemeImageDao
 import com.stslex.feature_home.data.model.ThemeImageDataModel
 import com.stslex.feature_home.data.model.mapToData
 import com.stslex.feature_home.data.model.mapToEntity

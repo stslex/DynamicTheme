@@ -37,7 +37,7 @@ fun Project.configureKotlinAndroid(
             )
             jvmTarget = "11"
             sourceSets.all {
-                kotlin.srcDir("build/generated/ksp/$name/kotlin")
+                kotlin.srcDir("build/generated/ksp/$name/java")
             }
         }
 

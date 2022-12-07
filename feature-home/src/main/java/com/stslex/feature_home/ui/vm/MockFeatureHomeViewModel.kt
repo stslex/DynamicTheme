@@ -1,5 +1,6 @@
 package com.stslex.feature_home.ui.vm
 
+import android.net.Uri
 import com.stslex.feature_home.domain.ThemeType
 import com.stslex.feature_home.ui.model.ThemeImageUIModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -10,10 +11,7 @@ import kotlinx.coroutines.flow.update
 class MockFeatureHomeViewModel : HomeFeatureAbstractionViewModel {
 
     private val _themeImageListFlow = MutableStateFlow(
-        sortedMapOf(
-            ThemeType.DARK to ThemeImageUIModel(ThemeType.DARK),
-            ThemeType.LIGHT to ThemeImageUIModel(ThemeType.LIGHT)
-        )
+        ThemeType.values().associateWith { ThemeImageUIModel(it, Uri.parse("")) }
     )
 
     override val themeImageListFlow: StateFlow<Map<ThemeType, ThemeImageUIModel>>

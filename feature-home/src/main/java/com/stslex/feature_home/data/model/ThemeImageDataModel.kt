@@ -5,5 +5,5 @@ import com.stslex.feature_home.domain.ThemeType
 
 data class ThemeImageDataModel(
     val themeType: ThemeType,
-    val uri: Uri? = null
+    val uri: Uri
 )

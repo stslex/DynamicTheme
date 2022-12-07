@@ -1,9 +1,10 @@
-package com.stslex.feature_home.data.data_source
+package com.stslex.core_data_source.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
+import com.stslex.core_data_source.model.ThemeImageEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao

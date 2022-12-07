@@ -1,9 +1,9 @@
-package com.stslex.feature_home.data
+package com.stslex.core_data_source.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.stslex.feature_home.data.data_source.ThemeImageDao
-import com.stslex.feature_home.data.data_source.ThemeImageEntity
+import com.stslex.core_data_source.dao.ThemeImageDao
+import com.stslex.core_data_source.model.ThemeImageEntity
 
 @Database(entities = [ThemeImageEntity::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {

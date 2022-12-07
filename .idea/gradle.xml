@@ -26,6 +26,7 @@
             <option value="$PROJECT_DIR$/build-logic" />
             <option value="$PROJECT_DIR$/build-logic/dependencies" />
             <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core-data-source" />
             <option value="$PROJECT_DIR$/core-navigation" />
             <option value="$PROJECT_DIR$/core-test" />
             <option value="$PROJECT_DIR$/core-ui" />
