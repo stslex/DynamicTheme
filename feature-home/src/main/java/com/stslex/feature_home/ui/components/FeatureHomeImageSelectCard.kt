@@ -18,8 +18,8 @@ import com.bumptech.glide.load.resource.bitmap.DownsampleStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.skydoves.landscapist.glide.GlideImage
 import com.stslex.core_ui.AppTheme
-import com.stslex.feature_home.domain.ThemeType
 import com.stslex.feature_home.ui.model.ThemeImageUIModel
+import com.stslex.feature_home.ui.model.ThemeUIType
 
 @Composable
 fun FeatureHomeImageSelectCard(
@@ -65,7 +65,7 @@ fun PreviewSelectablePrimaryRowItem(
     AppTheme {
         Row {
             FeatureHomeImageSelectCard(
-                imageUIModel = ThemeImageUIModel(ThemeType.DARK, Uri.parse("")),
+                imageUIModel = ThemeImageUIModel(ThemeUIType.DARK, Uri.parse("")),
                 onImagePickClick = {}
             )
         }

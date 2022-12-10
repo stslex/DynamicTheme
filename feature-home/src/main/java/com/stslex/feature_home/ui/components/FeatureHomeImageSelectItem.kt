@@ -18,9 +18,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.stslex.core_ui.AppTheme
-import com.stslex.feature_home.R
-import com.stslex.feature_home.domain.ThemeType
 import com.stslex.feature_home.ui.model.ThemeImageUIModel
+import com.stslex.feature_home.ui.model.ThemeUIType
 
 @Composable
 fun FeatureHomeImageSelectItem(
@@ -31,7 +30,11 @@ fun FeatureHomeImageSelectItem(
     onChangeImageClick: () -> Unit,
 ) {
     val animatedPadding = animateDpAsState(
-        targetValue = if (isSelected.value == imageUIModel.type.isDark) 16.dp else 32.dp
+        targetValue = if (isSelected.value == imageUIModel.type.isDark) {
+            16.dp
+        } else {
+            32.dp
+        }
     )
 
     Column(
@@ -40,13 +43,7 @@ fun FeatureHomeImageSelectItem(
     ) {
         Icon(
             modifier = Modifier.padding(animatedPadding.value),
-            painter = painterResource(
-                id = if (imageUIModel.type.isDark) {
-                    R.drawable.baseline_nightlight_24
-                } else {
-                    R.drawable.baseline_light_mode_24
-                }
-            ),
+            painter = painterResource(id = imageUIModel.type.iconRes),
             contentDescription = null
         )
         FeatureHomeImageSelectCard(
@@ -77,7 +74,7 @@ fun FeatureHomeImageSelectItemPreview() {
             mutableStateOf(false)
         }
         FeatureHomeImageSelectItem(
-            imageUIModel = ThemeImageUIModel(ThemeType.DARK, Uri.parse("")),
+            imageUIModel = ThemeImageUIModel(ThemeUIType.DARK, Uri.parse("")),
             isSelected = isSelected,
             onImagePickClick = {},
             onChangeImageClick = {}

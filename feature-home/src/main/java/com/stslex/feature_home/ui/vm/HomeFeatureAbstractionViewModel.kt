@@ -1,13 +1,13 @@
 package com.stslex.feature_home.ui.vm
 
-import com.stslex.feature_home.domain.ThemeType
+import android.net.Uri
 import com.stslex.feature_home.ui.model.ThemeImageUIModel
+import com.stslex.feature_home.ui.model.ThemeUIType
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.StateFlow
 
 interface HomeFeatureAbstractionViewModel {
 
-    val themeImageListFlow: StateFlow<Map<ThemeType, ThemeImageUIModel>?>
+    val themeImageListFlow: Flow<Map<ThemeUIType, ThemeImageUIModel>>
 
-    fun pickImage(image: ThemeImageUIModel)
+    fun pickImage(type: ThemeUIType?, uri: Uri?)
 }
