@@ -14,13 +14,18 @@ import androidx.compose.ui.unit.dp
 import com.stslex.core_ui.AppTheme
 import com.stslex.feature_home.R
 import com.stslex.feature_home.ui.components.HomeImagesSelectionBody
+import com.stslex.feature_home.ui.model.ThemeImageUIModel
 import com.stslex.feature_home.ui.vm.MockFeatureHomeViewModel
-import org.koin.androidx.compose.koinViewModel
+import kotlinx.coroutines.flow.Flow
 
 @Composable
 fun FeatureHomeScreen(
     modifier: Modifier = Modifier,
-    viewModel: FeatureHomeViewModel = koinViewModel()
+    themeImageListFlow: () -> Flow<List<ThemeImageUIModel>>,
+    onCardSelect: () -> Unit,
+    onImageDeleteClicked: () -> Unit,
+    onWallpaperSetClicked: () -> Unit,
+    onImagePickClicked: () -> Unit
 ) {
     LazyColumn(
         modifier = modifier,
@@ -28,8 +33,11 @@ fun FeatureHomeScreen(
         item(key = "images_body") {
             HomeImagesSelectionBody(
                 modifier = Modifier.fillMaxWidth(),
-                themeImageMapFlow = viewModel::themeImageListFlow,
-                imagePicker = viewModel::imagePicker
+                themeImageListFlow = themeImageListFlow,
+                onCardSelect = onCardSelect,
+                onImageDeleteClicked = onImageDeleteClicked,
+                onWallpaperSetClicked = onWallpaperSetClicked,
+                onImagePickClicked = onImagePickClicked
             )
         }
         item(key = "text_body") {
@@ -48,10 +56,14 @@ fun FeatureHomeScreen(
 @Preview(device = "id:pixel_6_pro", showSystemUi = true, showBackground = true)
 @Composable
 fun PreviewFeatureHomeScreen() {
-    val mockViewModel = MockFeatureHomeViewModel()
     AppTheme {
+        val vm = MockFeatureHomeViewModel()
 //        FeatureHomeScreen(
-//            viewModel = mockViewModel
+//            themeImageMapFlow = vm::themeImageListFlow,
+//            imagePicker = {
+//                ImagePicker(vm::pickImage)
+//            },
+//            onCardSelect = {}
 //        )
     }
 }

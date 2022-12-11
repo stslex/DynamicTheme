@@ -6,7 +6,8 @@ import com.stslex.feature_home.ui.model.ThemeUIType
 
 fun ThemeImageDataModel.mapToUI(): ThemeImageUIModel = ThemeImageUIModel(
     type = themeType.mapToUI(),
-    uri = uri
+    uri = uri,
+    isSelected = themeType == ThemeType.DARK
 )
 
 fun ThemeImageUIModel.mapToData(): ThemeImageDataModel = ThemeImageDataModel(

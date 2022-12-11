@@ -1,53 +1,72 @@
 package com.stslex.feature_home.ui
 
 import android.net.Uri
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.stslex.core.AppLogger
+import com.stslex.core_ui.BaseViewModel
 import com.stslex.feature_home.domain.FeatureHomeInteractor
 import com.stslex.feature_home.ui.model.ThemeImageUIModel
 import com.stslex.feature_home.ui.model.ThemeUIType
-import com.stslex.feature_home.ui.utils.ImagePicker
-import com.stslex.feature_home.ui.utils.ImagePickerImpl
-import com.stslex.feature_home.ui.vm.HomeFeatureAbstractionViewModel
-import kotlinx.coroutines.CoroutineExceptionHandler
+import com.stslex.feature_home.ui.utils.mapUriByType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.koin.core.component.getScopeName
 
 class FeatureHomeViewModel(
     private val interactor: FeatureHomeInteractor
-) : ViewModel(), HomeFeatureAbstractionViewModel {
+) : BaseViewModel() {
 
-    private val coroutineExceptionHandler = CoroutineExceptionHandler { context, e ->
-        handleError(e = e, scope = context.getScopeName().value)
+    private val _themeImageListFlow = MutableStateFlow(
+        ThemeUIType.values().map { type ->
+            ThemeImageUIModel(
+                type = type,
+                isSelected = type == ThemeUIType.DARK
+            )
+        }
+    )
+
+    val themeImageListFlow: Flow<List<ThemeImageUIModel>>
+        get() = _themeImageListFlow
+
+    val selectedImage: ThemeImageUIModel?
+        get() = _themeImageListFlow.value.firstOrNull { it.isSelected }
+
+    init {
+        interactor.getAllThemeImage()
+            .primaryFlow()
+            .onEach { imageList ->
+                _themeImageListFlow.update { mapImage ->
+                    mapImage.mapUriByType(imageList)
+                }
+            }.launchIn(viewModelScope)
     }
 
-    override val themeImageListFlow: Flow<Map<ThemeUIType, ThemeImageUIModel>>
-        get() = interactor.getAllThemeImage()
-            .catch { e -> handleError(e, this.getScopeName().value) }
-            .flowOn(Dispatchers.IO)
-
-    override fun pickImage(type: ThemeUIType?, uri: Uri?) {
+    fun onImagePicked(uri: Uri?) {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
-            val correctUri = uri ?: throw IllegalArgumentException("Uri is null")
-            val correctType = type ?: throw IllegalArgumentException("ThemeUIType is null")
-            val image = ThemeImageUIModel(correctType, correctUri)
+            val image = selectedImage?.copy(
+                uri = checkNotNull(uri) { ERR_URI_NULL }
+            ) ?: return@launch
             interactor.setThemeImage(image)
         }
     }
 
-    val imagePicker: ImagePicker by lazy {
-        ImagePickerImpl(::pickImage)
+    fun onImageDeleteClicked() {
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            val image = selectedImage ?: return@launch
+            interactor.deleteImage(image.type)
+        }
     }
 
-    private fun handleError(e: Throwable, scope: String = String()) {
-        AppLogger.logException(
-            throwable = e,
-            scope = scope
-        )
+    fun onCardSelect() {
+        _themeImageListFlow.update { list ->
+            list.map { image -> image.onSelect() }
+        }
+    }
+
+    companion object {
+        private const val ERR_URI_NULL = "Uri is null"
     }
 }

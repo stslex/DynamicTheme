@@ -6,7 +6,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface FeatureHomeInteractor {
 
-    fun getAllThemeImage(): Flow<Map<ThemeUIType, ThemeImageUIModel>>
+    fun getAllThemeImage(): Flow<List<ThemeImageUIModel>>
 
     suspend fun setThemeImage(image: ThemeImageUIModel)
+
+    suspend fun deleteImage(type: ThemeUIType)
 }

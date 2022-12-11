@@ -8,16 +8,16 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
-class MockFeatureHomeViewModel : HomeFeatureAbstractionViewModel {
+class MockFeatureHomeViewModel {
 
     private val _themeImageListFlow = MutableStateFlow(
-        ThemeUIType.values().associateWith { ThemeImageUIModel(it, Uri.parse("")) }
+        ThemeUIType.values().associateWith { ThemeImageUIModel(it) }
     )
 
-    override val themeImageListFlow: StateFlow<Map<ThemeUIType, ThemeImageUIModel>>
+    val themeImageListFlow: StateFlow<Map<ThemeUIType, ThemeImageUIModel>>
         get() = _themeImageListFlow.asStateFlow()
 
-    override fun pickImage(type: ThemeUIType?, uri: Uri?) {
+    fun pickImage(type: ThemeUIType?, uri: Uri?) {
         if (type == null || uri == null) return
         _themeImageListFlow.update { map ->
             map.toMutableMap().apply {

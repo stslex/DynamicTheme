@@ -4,6 +4,9 @@ plugins {
 }
 
 dependencies {
+    implementation(project(":core"))
+    implementation(project(":core-test"))
+
     val composeBom = platform(libs.androidx.compose.bom)
     api(composeBom)
     testApi(composeBom)

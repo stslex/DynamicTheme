@@ -10,16 +10,19 @@ class FeatureHomeInteractorImpl(
     private val themeImageRepository: ThemeImageRepository
 ) : FeatureHomeInteractor {
 
-    override fun getAllThemeImage(): Flow<Map<ThemeUIType, ThemeImageUIModel>> =
-        themeImageRepository
-            .getAllThemeImage().map { imageDataList ->
-                imageDataList.map { imageData ->
-                    imageData.mapToUI()
-                }.associateBy { imageUI -> imageUI.type }
+    override fun getAllThemeImage(): Flow<List<ThemeImageUIModel>> =
+        themeImageRepository.getAllThemeImage().map { imageDataList ->
+            imageDataList.map { imageData ->
+                imageData.mapToUI()
             }
+        }
 
     override suspend fun setThemeImage(image: ThemeImageUIModel) {
         val imageData = image.mapToData()
         themeImageRepository.setThemeImage(imageData)
+    }
+
+    override suspend fun deleteImage(type: ThemeUIType) {
+        themeImageRepository.deleteImage(type.mapToData())
     }
 }

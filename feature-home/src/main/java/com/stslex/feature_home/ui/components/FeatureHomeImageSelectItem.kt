@@ -1,15 +1,16 @@
 package com.stslex.feature_home.ui.components
 
-import android.net.Uri
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Create
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Icon
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Text
+import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -18,19 +19,20 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.stslex.core_ui.AppTheme
+import com.stslex.feature_home.R
 import com.stslex.feature_home.ui.model.ThemeImageUIModel
-import com.stslex.feature_home.ui.model.ThemeUIType
 
 @Composable
 fun FeatureHomeImageSelectItem(
     modifier: Modifier = Modifier,
     imageUIModel: ThemeImageUIModel,
-    isSelected: State<Boolean>,
-    onImagePickClick: () -> Unit,
-    onChangeImageClick: () -> Unit,
+    onImageSelect: () -> Unit,
+    onImageDeleteClicked: () -> Unit,
+    onWallpaperSetClicked: () -> Unit,
+    onImagePickClicked: () -> Unit
 ) {
     val animatedPadding = animateDpAsState(
-        targetValue = if (isSelected.value == imageUIModel.type.isDark) {
+        targetValue = if (imageUIModel.isSelected) {
             16.dp
         } else {
             32.dp
@@ -49,18 +51,45 @@ fun FeatureHomeImageSelectItem(
         FeatureHomeImageSelectCard(
             modifier = Modifier,
             imageUIModel = imageUIModel,
-            onImagePickClick = onImagePickClick
+            onImagePickClick = onImageSelect
         )
         AnimatedVisibility(
-            visible = isSelected.value == imageUIModel.type.isDark
+            visible = imageUIModel.isSelected
         ) {
-            OutlinedButton(
-                modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-                    .padding(top = 16.dp),
-                onClick = onChangeImageClick
-            ) {
-                Text(text = "change")
+            AppTheme(isDarkTheme = imageUIModel.type.isDark) {
+                Row(
+                    modifier = Modifier.padding(horizontal = 32.dp)
+                ) {
+                    IconButton(
+                        modifier = Modifier,
+                        onClick = onImagePickClicked
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Create,
+                            contentDescription = null
+                        )
+                    }
+                    IconButton(
+                        modifier = Modifier,
+                        onClick = onImageDeleteClicked,
+                        enabled = imageUIModel.uri.toString().isNotBlank()
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Delete,
+                            contentDescription = null
+                        )
+                    }
+                    IconButton(
+                        modifier = Modifier,
+                        onClick = onWallpaperSetClicked,
+                        enabled = imageUIModel.uri.toString().isNotBlank()
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.baseline_wallpaper_24),
+                            contentDescription = null
+                        )
+                    }
+                }
             }
         }
     }
@@ -73,11 +102,10 @@ fun FeatureHomeImageSelectItemPreview() {
         val isSelected = remember {
             mutableStateOf(false)
         }
-        FeatureHomeImageSelectItem(
-            imageUIModel = ThemeImageUIModel(ThemeUIType.DARK, Uri.parse("")),
-            isSelected = isSelected,
-            onImagePickClick = {},
-            onChangeImageClick = {}
-        )
+//        FeatureHomeImageSelectItem(
+//            imageUIModel = ThemeImageUIModel(ThemeUIType.DARK, Uri.parse("")),
+//            onImagePickClick = {},
+//            onChangeImageClick = {}
+//        )
     }
 }
