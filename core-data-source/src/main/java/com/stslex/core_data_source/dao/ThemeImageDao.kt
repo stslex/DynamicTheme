@@ -13,6 +13,9 @@ interface ThemeImageDao {
     @Query("SELECT * FROM theme_image_table")
     fun getAllThemeImage(): Flow<List<ThemeImageEntity>>
 
+    @Query("SELECT * FROM theme_image_table")
+    suspend fun getAllImages(): List<ThemeImageEntity>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun setThemeImage(image: ThemeImageEntity)
 

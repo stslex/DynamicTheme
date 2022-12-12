@@ -34,7 +34,7 @@ dependencies {
     implementation(project(":core-navigation"))
     implementation(project(":core-data-source"))
     implementation(project(":feature-home"))
-
-    implementation("androidx.appcompat:appcompat:1.5.1")
-    implementation("com.google.android.material:material:1.7.0")
+    implementation(libs.androidx.work.runtime)
+    implementation("androidx.core:core-splashscreen:1.0.0")
+    implementation("androidx.core:core-google-shortcuts:1.1.0")
 }
