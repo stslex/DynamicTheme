@@ -12,9 +12,10 @@ import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 
-class GlideCustomTarget(
+class GlideReceiverCustomTarget(
     private val wallpaperManager: WallpaperManager,
-    private val scope: CoroutineScope
+    private val scope: CoroutineScope,
+    private val cancelNotification: () -> Unit
 ) : CustomTarget<Bitmap>() {
 
     private var wallpaperSetJob: Job? = null
@@ -27,6 +28,7 @@ class GlideCustomTarget(
             start = CoroutineStart.DEFAULT,
             block = {
                 wallpaperManager.setBitmap(resource)
+                cancelNotification()
             }
         )
     }
@@ -34,5 +36,20 @@ class GlideCustomTarget(
     override fun onLoadCleared(placeholder: Drawable?) {
         AppLogger.logInfo("onLoadCleared", javaClass.simpleName)
         wallpaperSetJob?.cancel()
+        cancelNotification()
+    }
+
+    class Factory(
+        private val wallpaperManager: WallpaperManager,
+    ) {
+
+        fun create(
+            scope: CoroutineScope,
+            cancelNotification: () -> Unit
+        ): CustomTarget<Bitmap> = GlideReceiverCustomTarget(
+            wallpaperManager = wallpaperManager,
+            scope = scope,
+            cancelNotification = cancelNotification
+        )
     }
 }

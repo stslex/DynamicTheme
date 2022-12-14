@@ -1,7 +1,5 @@
 package com.stslex.dynamictheme.reciever
 
-import android.annotation.SuppressLint
-import android.app.WallpaperManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -10,10 +8,12 @@ import android.graphics.Bitmap
 import android.net.Uri
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestBuilder
+import com.bumptech.glide.request.target.CustomTarget
 import com.stslex.core.AppLogger
 import com.stslex.core_data_source.dao.ThemeImageDao
 import com.stslex.core_data_source.model.ThemeTypeEntity
 import com.stslex.dynamictheme.utils.CoroutineExt.launchOrInvoke
+import com.stslex.dynamictheme.utils.PrimaryExt.nullIfSameOrNull
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Dispatchers
@@ -24,40 +24,41 @@ import org.koin.java.KoinJavaComponent.inject
 class ThemeChangeReceiver : BroadcastReceiver() {
 
     private val themeImageDao: ThemeImageDao by inject(ThemeImageDao::class.java)
+    private val glideTargetFactory: GlideReceiverCustomTarget.Factory by inject(
+        GlideReceiverCustomTarget.Factory::class.java
+    )
+    private val glideTarget: CustomTarget<Bitmap> by lazy {
+        glideTargetFactory.create(scope, ::cancelNotification)
+    }
+
     private val scope = CoroutineScope(SupervisorJob())
     private var receiverJob: Job? = null
+
     private var _themeType: ThemeTypeEntity? = null
     private val themeType: ThemeTypeEntity
         get() = requireNotNull(_themeType)
 
-    @SuppressLint("UnsafeProtectedBroadcastReceiver")
     override fun onReceive(context: Context, intent: Intent) {
         AppLogger.logInfo("receive: $intent", javaClass.simpleName)
 
-        val currentType = context.currentUiType ?: return
-        if (_themeType == currentType) return
-        else _themeType = currentType
+        _themeType = _themeType.nullIfSameOrNull(context.currentUiType) ?: return
+        receiverJob = Glide
+            .with(context)
+            .asBitmap()
+            .startImageReceiverJob()
+    }
 
-        val target = GlideCustomTarget(
-            wallpaperManager = WallpaperManager.getInstance(context),
-            scope = scope
-        )
-        val requestBuilder = Glide.with(context).asBitmap()
-
-        receiverJob = scope.launchOrInvoke(
+    private fun RequestBuilder<Bitmap>.startImageReceiverJob(): Job =
+        scope.launchOrInvoke(
             job = receiverJob,
             context = Dispatchers.IO,
             start = CoroutineStart.DEFAULT,
             block = {
-                requestBuilder.startImageJob(target)
+                val uri = themeImageDao.getImageUri(themeType).let(Uri::parse)
+                load(uri).into(glideTarget)
+                // TODO send notification
             }
         )
-    }
-
-    private suspend fun RequestBuilder<Bitmap>.startImageJob(target: GlideCustomTarget) {
-        val uri = themeImageDao.getAllImages().firstOrNull { it.themeType == themeType }?.uri
-        load(Uri.parse(uri)).into(target)
-    }
 
     private val Context.currentUiType: ThemeTypeEntity?
         get() = when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
@@ -65,4 +66,8 @@ class ThemeChangeReceiver : BroadcastReceiver() {
             Configuration.UI_MODE_NIGHT_YES -> ThemeTypeEntity.DARK
             else -> null
         }
+
+    private fun cancelNotification() {
+        //TODO close notification
+    }
 }
