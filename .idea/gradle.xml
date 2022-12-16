@@ -10,14 +10,7 @@
               <build path="$PROJECT_DIR$/build-logic" name="build-logic">
                 <projects>
                   <project path="$PROJECT_DIR$/build-logic" />
-                  <project path="$PROJECT_DIR$/build-logic/app" />
-                  <project path="$PROJECT_DIR$/build-logic/core" />
-                  <project path="$PROJECT_DIR$/build-logic/core-data-source" />
-                  <project path="$PROJECT_DIR$/build-logic/core-navigation" />
-                  <project path="$PROJECT_DIR$/build-logic/core-test" />
-                  <project path="$PROJECT_DIR$/build-logic/core-ui" />
                   <project path="$PROJECT_DIR$/build-logic/dependencies" />
-                  <project path="$PROJECT_DIR$/build-logic/feature-home" />
                 </projects>
               </build>
             </builds>
@@ -31,18 +24,10 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/build-logic" />
-            <option value="$PROJECT_DIR$/build-logic/app" />
-            <option value="$PROJECT_DIR$/build-logic/core" />
-            <option value="$PROJECT_DIR$/build-logic/core-data-source" />
-            <option value="$PROJECT_DIR$/build-logic/core-navigation" />
-            <option value="$PROJECT_DIR$/build-logic/core-test" />
-            <option value="$PROJECT_DIR$/build-logic/core-ui" />
             <option value="$PROJECT_DIR$/build-logic/dependencies" />
-            <option value="$PROJECT_DIR$/build-logic/feature-home" />
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/core-data-source" />
             <option value="$PROJECT_DIR$/core-navigation" />
-            <option value="$PROJECT_DIR$/core-test" />
             <option value="$PROJECT_DIR$/core-ui" />
             <option value="$PROJECT_DIR$/feature-home" />
           </set>

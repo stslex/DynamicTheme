@@ -15,11 +15,3 @@ dependencyResolutionManagement {
 }
 
 include(":dependencies")
-include(":app")
-include(":core")
-include(":core-data-source")
-include(":core-navigation")
-include(":core-test")
-include(":core-ui")
-include(":feature-home")
-
