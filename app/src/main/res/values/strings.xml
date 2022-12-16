@@ -3,4 +3,16 @@
     <string name="notification_title">DynamicTheme</string>
     <string name="notification_message">theme editing</string>
     <string name="ticker_text">ticker text</string>
+
+    <string name="shortcut_night_label">Set night wallpaper</string>
+    <string name="shortcut_night_label_short">Night wallpaper</string>
+    <string name="shortcut_night_label_long">apply wallpaper for night theme mode</string>
+    <string name="shortcut_night_message_disable">shortcut is disable</string>
+
+    <string name="shortcut_light_label">Set light wallpaper</string>
+    <string name="shortcut_light_label_short">Light wallpaper</string>
+    <string name="shortcut_light_label_long">apply wallpaper for light theme mode</string>
+    <string name="shortcut_light_message_disable">shortcut is disable</string>
+
+    <string name="app_widget_description">This is an app widget description</string>
 </resources>
