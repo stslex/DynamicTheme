@@ -5,7 +5,11 @@ import androidx.room.RoomDatabase
 import com.stslex.core_data_source.dao.ThemeImageDao
 import com.stslex.core_data_source.model.ThemeImageEntity
 
-@Database(entities = [ThemeImageEntity::class], version = 1)
+@Database(
+    entities = [ThemeImageEntity::class],
+    exportSchema = false,
+    version = 1
+)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun themeImageDao(): ThemeImageDao

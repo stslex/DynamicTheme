@@ -20,10 +20,10 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "DynamicTheme"
+
 include(":app")
 include(":core")
 include(":core-ui")
-include(":core-test")
 include(":core-navigation")
 include(":feature-home")
 include(":core-data-source")
