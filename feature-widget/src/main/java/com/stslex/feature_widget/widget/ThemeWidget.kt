@@ -1,4 +1,4 @@
-package com.stslex.dynamictheme.ui.widget
+package com.stslex.feature_widget.widget
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -24,7 +24,14 @@ import androidx.glance.text.FontWeight
 import androidx.glance.text.Text
 import androidx.glance.text.TextAlign
 import androidx.glance.text.TextStyle
-import com.stslex.feature_home.R
+import com.stslex.feature_widget.AppWidgetBox
+import com.stslex.feature_widget.AppWidgetColumn
+import com.stslex.feature_widget.AppWidgetRow
+import com.stslex.feature_widget.GlanceTheme
+import com.stslex.feature_widget.R
+import com.stslex.feature_widget.worker.ThemeWidgetInfoStateDefinition
+import com.stslex.feature_widget.base.UpdateWidgetAction
+import com.stslex.feature_widget.base.ThemeWidgetState
 
 class ThemeWidget : GlanceAppWidget() {
 
@@ -85,12 +92,12 @@ class ThemeWidget : GlanceAppWidget() {
             AppWidgetRow {
                 SingleItemThin(
                     modifier = GlanceModifier.defaultWeight(),
-                    imageSource = R.drawable.baseline_nightlight_24,
+                    imageSource = R.drawable.ic_widget_night_mode,
                 )
                 Spacer(GlanceModifier.size(8.dp))
                 SingleItemThin(
                     modifier = GlanceModifier.defaultWeight(),
-                    imageSource = R.drawable.baseline_light_mode_24,
+                    imageSource = R.drawable.ic_widget_light_mode,
                 )
             }
         }
@@ -105,12 +112,12 @@ class ThemeWidget : GlanceAppWidget() {
             AppWidgetRow {
                 SingleItem(
                     modifier = GlanceModifier.defaultWeight(),
-                    imageSource = R.drawable.baseline_nightlight_24,
+                    imageSource = R.drawable.ic_widget_night_mode,
                 )
                 Spacer(GlanceModifier.size(8.dp))
                 SingleItem(
                     modifier = GlanceModifier.defaultWeight(),
-                    imageSource = R.drawable.baseline_light_mode_24,
+                    imageSource = R.drawable.ic_widget_light_mode,
                 )
             }
         }
@@ -123,7 +130,7 @@ class ThemeWidget : GlanceAppWidget() {
         AppWidgetBox(modifier = modifier) {
             SingleItemThin(
                 modifier = GlanceModifier.fillMaxSize(),
-                imageSource = R.drawable.baseline_light_mode_24,
+                imageSource = R.drawable.ic_widget_light_mode,
             )
         }
     }

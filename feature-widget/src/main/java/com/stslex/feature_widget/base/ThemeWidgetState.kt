@@ -1,4 +1,4 @@
-package com.stslex.dynamictheme.ui.widget
+package com.stslex.feature_widget.base
 
 import kotlinx.serialization.Serializable
 

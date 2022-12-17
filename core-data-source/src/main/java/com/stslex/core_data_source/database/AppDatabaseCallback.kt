@@ -14,6 +14,7 @@ import org.koin.java.KoinJavaComponent.inject
 
 class AppDatabaseCallback : RoomDatabase.Callback() {
 
+    @Suppress("assigned")
     private val roomDatabase: AppDatabase by inject(AppDatabase::class.java)
 
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
