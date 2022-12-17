@@ -1,9 +1,10 @@
-package com.stslex.dynamictheme.ui.widget
+package com.stslex.feature_widget.base
 
 import android.content.Context
 import androidx.glance.GlanceId
 import androidx.glance.action.ActionParameters
 import androidx.glance.appwidget.action.ActionCallback
+import com.stslex.feature_widget.worker.ThemeWorker
 
 class UpdateWidgetAction : ActionCallback {
 

@@ -6,7 +6,6 @@ import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
 import com.stslex.core.AppLogger
-import com.stslex.dynamictheme.reciever.ChangeThemeRuntimeService.Companion.KEY_THEME_TYPE
 import com.stslex.dynamictheme.ui.MainActivity
 
 class ShortcutBuilderImpl(private val context: Context) : ShortcutBuilder {
@@ -32,9 +31,6 @@ class ShortcutBuilderImpl(private val context: Context) : ShortcutBuilder {
             .setIntent(shortcutIntent)
             .build()
 
-
-    private val Shortcut.shortcutIntent: Intent
-        get() = Intent(context, MainActivity::class.java).apply {
-            putExtra(KEY_THEME_TYPE, this@shortcutIntent.type.name)
-        }
+    private val shortcutIntent: Intent
+        get() = Intent(context, MainActivity::class.java)
 }

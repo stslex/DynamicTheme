@@ -1,4 +1,4 @@
-package com.stslex.dynamictheme.ui.widget
+package com.stslex.feature_widget.worker
 
 import android.content.Context
 import androidx.glance.GlanceId
@@ -10,6 +10,8 @@ import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
+import com.stslex.feature_widget.base.ThemeWidgetState
+import com.stslex.feature_widget.widget.ThemeWidget
 import java.time.Duration
 
 class ThemeWorker(

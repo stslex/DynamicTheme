@@ -15,7 +15,6 @@ import com.stslex.core_ui.AppTheme
 import com.stslex.feature_home.R
 import com.stslex.feature_home.ui.components.HomeImagesSelectionBody
 import com.stslex.feature_home.ui.model.ThemeImageUIModel
-import com.stslex.feature_home.ui.vm.MockFeatureHomeViewModel
 import kotlinx.coroutines.flow.Flow
 
 @Composable
@@ -57,13 +56,5 @@ fun FeatureHomeScreen(
 @Composable
 fun PreviewFeatureHomeScreen() {
     AppTheme {
-        val vm = MockFeatureHomeViewModel()
-//        FeatureHomeScreen(
-//            themeImageMapFlow = vm::themeImageListFlow,
-//            imagePicker = {
-//                ImagePicker(vm::pickImage)
-//            },
-//            onCardSelect = {}
-//        )
     }
 }

@@ -2,7 +2,6 @@ plugins {
     id("dynamictheme.android.application")
     id("dynamictheme.android.application.compose")
     id("org.jetbrains.kotlin.android")
-    id("org.jetbrains.kotlin.plugin.serialization") version "1.7.21"
 }
 
 @Suppress("UnstableApiUsage")
@@ -35,9 +34,7 @@ dependencies {
     implementation(project(":core-navigation"))
     implementation(project(":core-data-source"))
     implementation(project(":feature-home"))
-    implementation(libs.androidx.work.runtime)
+    implementation(project(":feature-widget"))
     implementation("androidx.core:core-splashscreen:1.0.0")
     implementation("androidx.core:core-google-shortcuts:1.1.0")
-    implementation("androidx.glance:glance-appwidget:1.0.0-alpha05")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
 }

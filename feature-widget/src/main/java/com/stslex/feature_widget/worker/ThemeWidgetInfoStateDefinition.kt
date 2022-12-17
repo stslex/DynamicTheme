@@ -1,4 +1,4 @@
-package com.stslex.dynamictheme.ui.widget
+package com.stslex.feature_widget.worker
 
 import android.content.Context
 import androidx.datastore.core.CorruptionException
@@ -7,6 +7,7 @@ import androidx.datastore.core.Serializer
 import androidx.datastore.dataStore
 import androidx.datastore.dataStoreFile
 import androidx.glance.state.GlanceStateDefinition
+import com.stslex.feature_widget.base.ThemeWidgetState
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 import java.io.File

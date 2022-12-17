@@ -82,9 +82,7 @@ fun FeatureHomeImageSelectCard(
 
 @Preview
 @Composable
-fun PreviewSelectablePrimaryRowItem(
-    modifier: Modifier = Modifier
-) {
+fun PreviewSelectablePrimaryRowItem() {
     AppTheme {
         Row {
             FeatureHomeImageSelectCard(

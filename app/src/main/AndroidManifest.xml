@@ -23,18 +23,6 @@
         android:theme="@style/Theme.DynamicTheme"
         tools:targetApi="33">
 
-        <receiver
-            android:name="com.stslex.dynamictheme.ui.widget.ThemeWidgetReceiver"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/theme_change_widget_info" />
-        </receiver>
-
         <activity
             android:name="com.stslex.dynamictheme.ui.MainActivity"
             android:configChanges="uiMode"
@@ -45,6 +33,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
 
+        <receiver
+            android:name="com.stslex.feature_widget.widget.ThemeWidgetReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/theme_change_widget_info" />
+        </receiver>
+    </application>
 </manifest>

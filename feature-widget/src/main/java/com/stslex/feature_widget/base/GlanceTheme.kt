@@ -1,11 +1,10 @@
-package com.stslex.dynamictheme.ui.widget
+package com.stslex.feature_widget
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.glance.unit.ColorProvider
-import com.slex.dynamictheme.R
 
 object GlanceTheme {
     val colors: ColorProviders

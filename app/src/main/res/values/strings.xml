@@ -13,6 +13,4 @@
     <string name="shortcut_light_label_short">Light wallpaper</string>
     <string name="shortcut_light_label_long">apply wallpaper for light theme mode</string>
     <string name="shortcut_light_message_disable">shortcut is disable</string>
-
-    <string name="app_widget_description">This is an app widget description</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.stslex.dynamictheme.ui.widget
+package com.stslex.feature_widget
 
 import android.os.Build
 import androidx.compose.runtime.Composable
