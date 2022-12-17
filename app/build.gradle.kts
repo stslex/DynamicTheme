@@ -31,7 +31,6 @@ android {
 
 dependencies {
     implementation(project(":core"))
-    implementation(project(":core-test"))
     implementation(project(":core-ui"))
     implementation(project(":core-navigation"))
     implementation(project(":core-data-source"))
@@ -41,5 +40,4 @@ dependencies {
     implementation("androidx.core:core-google-shortcuts:1.1.0")
     implementation("androidx.glance:glance-appwidget:1.0.0-alpha05")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
-
 }

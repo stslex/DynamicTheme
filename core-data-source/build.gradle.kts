@@ -5,7 +5,6 @@ plugins {
 
 dependencies {
     implementation(project(":core"))
-    implementation(project(":core-test"))
 
     libs.apply {
         api(ksp.api)
