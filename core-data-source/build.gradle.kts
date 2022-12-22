@@ -1,6 +1,6 @@
 plugins {
     id("dynamictheme.android.library")
-    alias(libs.plugins.ksp)
+    id("com.google.devtools.ksp")
 }
 
 dependencies {

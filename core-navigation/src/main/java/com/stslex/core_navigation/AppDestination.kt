@@ -1,7 +1,7 @@
 package com.stslex.core_navigation
 
 enum class AppDestination(
-    vararg val argsNames: String
+    private vararg val argsNames: String
 ) {
     HOME("home");
 

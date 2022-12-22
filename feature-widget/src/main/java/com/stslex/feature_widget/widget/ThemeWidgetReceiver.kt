@@ -1,8 +1,9 @@
-package com.stslex.dynamictheme.ui.widget
+package com.stslex.feature_widget.widget
 
 import android.content.Context
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.GlanceAppWidgetReceiver
+import com.stslex.feature_widget.worker.ThemeWorker
 
 class ThemeWidgetReceiver(
     override val glanceAppWidget: GlanceAppWidget = ThemeWidget()

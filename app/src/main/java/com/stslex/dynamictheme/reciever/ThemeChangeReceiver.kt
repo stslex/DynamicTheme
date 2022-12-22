@@ -21,6 +21,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import org.koin.java.KoinJavaComponent.inject
 
+@Suppress("EmptyMethod")
 class ThemeChangeReceiver : BroadcastReceiver() {
 
     private val themeImageDao: ThemeImageDao by inject(ThemeImageDao::class.java)
