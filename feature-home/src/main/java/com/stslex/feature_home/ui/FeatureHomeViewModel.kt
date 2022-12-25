@@ -2,31 +2,25 @@ package com.stslex.feature_home.ui
 
 import android.net.Uri
 import androidx.lifecycle.viewModelScope
+import com.stslex.core.AppDispatcher
 import com.stslex.core_ui.BaseViewModel
 import com.stslex.feature_home.domain.FeatureHomeInteractor
+import com.stslex.feature_home.domain.initialUIList
 import com.stslex.feature_home.ui.model.ThemeImageUIModel
-import com.stslex.feature_home.ui.model.ThemeUIType
 import com.stslex.feature_home.ui.utils.mapUriByType
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 
 class FeatureHomeViewModel(
-    private val interactor: FeatureHomeInteractor
-) : BaseViewModel() {
+    private val interactor: FeatureHomeInteractor,
+    appDispatcher: AppDispatcher
+) : BaseViewModel(appDispatcher) {
 
-    private val _themeImageListFlow = MutableStateFlow(
-        ThemeUIType.values().map { type ->
-            ThemeImageUIModel(
-                type = type,
-                isSelected = type == ThemeUIType.DARK
-            )
-        }
-    )
+    private val _themeImageListFlow: MutableStateFlow<List<ThemeImageUIModel>> =
+        MutableStateFlow(initialUIList)
 
     val themeImageListFlow: Flow<List<ThemeImageUIModel>>
         get() = _themeImageListFlow
@@ -45,17 +39,17 @@ class FeatureHomeViewModel(
     }
 
     fun onImagePicked(uri: Uri?) {
-        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+        launchCoroutine {
             val image = selectedImage?.copy(
                 uri = checkNotNull(uri) { ERR_URI_NULL }
-            ) ?: return@launch
+            ) ?: return@launchCoroutine
             interactor.setThemeImage(image)
         }
     }
 
     fun onImageDeleteClicked() {
-        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
-            val image = selectedImage ?: return@launch
+        launchCoroutine {
+            val image = selectedImage ?: return@launchCoroutine
             interactor.deleteImage(image.type)
         }
     }

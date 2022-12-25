@@ -1,5 +1,7 @@
 package com.stslex.feature_home.di
 
+import com.stslex.feature_home.data.model.ThemeImageDataEntityMapper
+import com.stslex.feature_home.data.model.ThemeImageEntityDataMapper
 import com.stslex.feature_home.data.repository.ThemeImageRepository
 import com.stslex.feature_home.data.repository.ThemeImageRepositoryImpl
 import com.stslex.feature_home.domain.FeatureHomeInteractor
@@ -15,9 +17,9 @@ class ModuleFeatureHome {
     val module = module {
 
         factoryOf(::FeatureHomeInteractorImpl) { bind<FeatureHomeInteractor>() }
-
         singleOf(::ThemeImageRepositoryImpl) { bind<ThemeImageRepository>() }
-
+        factoryOf(ThemeImageDataEntityMapper::Base) { bind<ThemeImageDataEntityMapper>() }
+        factoryOf(ThemeImageEntityDataMapper::Base) { bind<ThemeImageEntityDataMapper>() }
         viewModelOf(::FeatureHomeViewModel)
     }
 }

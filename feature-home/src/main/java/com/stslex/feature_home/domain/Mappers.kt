@@ -18,3 +18,11 @@ fun ThemeImageUIModel.mapToData(): ThemeImageDataModel = ThemeImageDataModel(
 fun ThemeType.mapToUI(): ThemeUIType = ThemeUIType.getTypeOfValue(isDark)
 
 fun ThemeUIType.mapToData(): ThemeType = ThemeType.getTypeOfValue(isDark)
+
+val initialUIList: List<ThemeImageUIModel>
+    get() = ThemeUIType.values().map { type ->
+        ThemeImageUIModel(
+            type = type,
+            isSelected = type == ThemeUIType.DARK
+        )
+    }

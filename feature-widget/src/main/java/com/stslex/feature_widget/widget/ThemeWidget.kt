@@ -29,17 +29,21 @@ import com.stslex.feature_widget.AppWidgetColumn
 import com.stslex.feature_widget.AppWidgetRow
 import com.stslex.feature_widget.GlanceTheme
 import com.stslex.feature_widget.R
-import com.stslex.feature_widget.worker.ThemeWidgetInfoStateDefinition
-import com.stslex.feature_widget.base.UpdateWidgetAction
 import com.stslex.feature_widget.base.ThemeWidgetState
+import com.stslex.feature_widget.base.UpdateWidgetAction
+import com.stslex.feature_widget.worker.ThemeWidgetInfoStateDefinition
 
 class ThemeWidget : GlanceAppWidget() {
 
     companion object {
-        private val smallMode = DpSize(70.dp, 70.dp)
-        private val thinMode = DpSize(70.dp, 100.dp)
-        private val widthMode = DpSize(100.dp, 70.dp)
-        private val largeMode = DpSize(150.dp, 150.dp)
+        private const val minSize = 70
+        private const val mediumSize = 100
+        private const val maxSize = 150
+
+        private val smallMode = DpSize(minSize.dp, minSize.dp)
+        private val thinMode = DpSize(minSize.dp, mediumSize.dp)
+        private val widthMode = DpSize(mediumSize.dp, minSize.dp)
+        private val largeMode = DpSize(maxSize.dp, maxSize.dp)
     }
 
     override val stateDefinition = ThemeWidgetInfoStateDefinition

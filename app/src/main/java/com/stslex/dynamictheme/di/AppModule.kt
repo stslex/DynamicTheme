@@ -1,5 +1,6 @@
 package com.stslex.dynamictheme.di
 
+import com.stslex.core.CoreModule
 import com.stslex.core_data_source.di.ModuleDatabase
 import com.stslex.dynamictheme.reciever.ThemeServicesModule
 import com.stslex.dynamictheme.ui.shortcut.ShortcutModule
@@ -9,5 +10,6 @@ val appModules = listOf(
     ModuleFeatureHome().module,
     ModuleDatabase().module,
     ThemeServicesModule().module,
-    ShortcutModule().module
+    ShortcutModule().module,
+    CoreModule().module
 )
